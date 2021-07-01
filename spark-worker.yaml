@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spark-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+       name: spark-worker
+  template:
+    metadata:
+      labels:
+        name: spark-worker
+    spec:
+      containers:
+      - image: spark-kubernetes:latest
+        imagePullPolicy : "IfNotPresent"
+        name: spark-worker
+        ports:
+        - containerPort: 7078
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "1"
+        command:
+         - "/bin/bash"
+         - "-c"
+         - "--"
+        args :
+         - './start-worker.sh; sleep infinity'
