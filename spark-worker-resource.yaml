@@ -12,7 +12,7 @@ spec:
         name: spark-worker
     spec:
       containers:
-      - image: spark-kubernetes:latest
+      - image: cande/spark-kubernetes:v3.1.2
         imagePullPolicy : "IfNotPresent"
         name: spark-worker
         ports:
